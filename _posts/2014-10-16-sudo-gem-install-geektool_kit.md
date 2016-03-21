@@ -21,7 +21,7 @@ Paternity leave has afforded me a few spare cycles recently and, though sporadic
 
 
 ### Future Geeklets
-I'm looking forward to incorporating versions of the most popular geeklets into GeektookKit over the next few weeks. Off the top of my head I'd like to have geeklets for CPU load averages, system uptime, a process monitor that would display CPU and RAM usage at the same time, current and fore-casted weather, the current song being played by iTunes or Spotify, a count of unread email messages, and the next few items in your todo.txt file.
+I'm looking forward to incorporating versions of the most popular geeklets into GeektoolKit over the next few weeks. Off the top of my head I'd like to have geeklets for CPU load averages, system uptime, a process monitor that would display CPU and RAM usage at the same time, current and fore-casted weather, the current song being played by iTunes or Spotify, a count of unread email messages, and the next few items in your todo.txt file.
 
 ### Future Functionality
 More than anything I think it would be cool to be able to generate a 'composite geeklet' by providing base coordinates and have the gem create the individual geeklets with the appropriate offsets so that we won't have to manually move multiple individual geeklets. I'd also like to have the individual geeklets automatically import themselves into GeekTool after being generated.
