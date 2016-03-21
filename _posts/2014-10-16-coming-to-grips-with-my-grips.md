@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "sudo gem install geektool_kit"
+date:   2014-10-16 00:00:00 -0800
+categories: 
+---
+
+I've had a few spare cycles recently, so I've been messing around with [GeekTool](http://projects.tynsoe.org/en/geektool/). The first thing that I did was look for geeklets that I could use or that would inspire me to create my own. I found a lot of shared geeklets on the [Geeklets page at MacOSXTips.co.uk](http://www.macosxtips.co.uk/geeklets/) and remembered that [Brett Terpstra](http://brettterpstra.com/) had posted [an unsolicited GeekTool showcase](http://brettterpstra.com/2014/07/27/an-unsolicited-geektool-showcase/) recently, so I took a look at both and installed a few geeklets from each.
+
+After installing a few from the gallery at MacOSXTips.co.uk and re-creating Terpstra's '[Top CPU Processes](http://brettterpstra.com/2011/09/16/geeklet-top-cpu-processes/)' and '[Top RAM Processes](http://brettterpstra.com/2011/11/09/geeklet-top-ram-processes/)' monitors, I found myself pretty comfortable with the process of sharing, installing, and running geeklets. Comfortable enough, in fact, that I started feeling friction. 
+
+I hate friction. One geeklet (or what appeared to be one geeklet) was actually comprised of 6 disparate geeklets that had been laid out in a very particular way. Since GeekTool doesn't allow you to select multiple geeklets at once, moving this composite geeklet after all of it's components have been imported is more effort than I'm willing to exert. The installation of some other geeklets require that you replace a substring in their massive conglomeration of piped bash commands in order to make the results relevant to you. Another one that bothered me used two geeklets to display one piece of information; one was in charge of displaying the information, while the other displayed nothing and simply used GeekTool to act as a cron, firing a script every few seconds, that changed the file that was going to be displayed.
+
+After installing and configuring the two previously mentioned Terpstra geeklets, I noticed that the data in the right column (percent or size) didn't always line up even though I'd chosen a mono-space font. Instead of figuring out how to 'fix' his scripts, I decided to rewrite the scripts in a less script-y, more unit-testable, style. 
+
+This would be the part where you say "Wait a tic, I thought you said you hated friction?" and you'd be right, I did and I do. A rewrite does SEEM like more work/friction than necessary to accomplish my goal. But I didn't mention that I love unit testing and know that, done well, it can greatly reduce friction; given the option to write a script and run it a bunch of times to see how it may screw up, or to write a few tests that fully exercise the interesting parts of a class that encapsulates the functionality of a script, I'll take the latter any day. Unit tests, done well, are fast, repeatable, and their intentions are easy to understand. Running the script by hand to test for bugs require institutional knowledge of potential bugs, which does not lend itself to maintainability by anyone except the original author (provided they still remember what edge-cases they were coding around, and what to look for) or someone that has worked with the code for long enough to know how it's supposed to behave and when it should (and should not) break.
+
+After breaking the scripts into a few well-tested classes, I fixed the intermittent spacing issues and put a half dozen specs in place to ensure everything works as expected. I quickly realized that, though I was totally comfortable having inter-file dependencies, sharing these files/classes/geeklets was going to introduce a similar amount of friction, that I was trying to avoid, to anyone that might want to use my geeklets. So I started thinking about ways to write geeklets the way I would write (and test) production code for myself or my employer, and how I could reduce the friction for people that would want to use, or extend, them. It dawned on me, relatively quickly, that an opportunity to reduce friction for GeekTool users had presented itself. My willingness to accept the challenge, that was the question.
+
+Paternity leave has afforded me a few spare cycles recently and, though sporadic, I've been able to use those cycles to create a ruby gem called [GeektoolKit](https://rubygems.org/gems/geektool_kit) and have kicked it off with scripts and geeklets for a CPU monitor, a RAM usage monitor, and a calendar of the current month (with the current day displayed in a different color). The [source can be found on GitHub](https://github.com/robKitson/geektool_kit) and the gem is hosted at [RubyGems.org](https://rubygems.org/gems/geektool_kit). Feel free to download, use, and submit pull requests!
+
+
+### Future Geeklets
+I'm looking forward to incorporating versions of the most popular geeklets into GeektookKit over the next few weeks. Off the top of my head I'd like to have geeklets for CPU load averages, system uptime, a process monitor that would display CPU and RAM usage at the same time, current and fore-casted weather, the current song being played by iTunes or Spotify, a count of unread email messages, and the next few items in your todo.txt file.
+
+### Future Functionality
+More than anything I think it would be cool to be able to generate a 'composite geeklet' by providing base coordinates and have the gem create the individual geeklets with the appropriate offsets so that we won't have to manually move multiple individual geeklets. I'd also like to have the individual geeklets automatically import themselves into GeekTool after being generated.
+
